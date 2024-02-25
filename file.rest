@@ -1,0 +1,3 @@
+GET http://localhost:3300
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwc2V1ZG8iOiJ0ZXN0IiwicGFzc3dvcmQiOiJ0ZXN0IiwiaWF0IjoxNzA4ODczODUyfQ.aYGAgNOI28tkqSW3F2Wer3t1gSlOW8CYYVUE4OumWoU
+Content-Type: application/json
