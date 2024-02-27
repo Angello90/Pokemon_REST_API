@@ -8,10 +8,36 @@ const Get_Hash_Password = async(password) =>{
     return await Bcrypt.hash(password, salt);
 }
 
+// admin function
+
 const user_exist = async(pseudo, password) =>{
-    console.log("hello world");
+    return prisma.user.findFirst({
+        where : {
+            pseudo : pseudo
+        }
+    })
+}
+
+const add_user = async(data) =>{
+    prisma.user.create(data);
+}
+
+const delete_user = async(id) =>{
+    try{
+        prisma.user.delete({
+            where : {
+                id : id
+            }
+        })
+    }
+    catch(e){
+        console.error(`Error : ${e.message}`);
+    }
 }
 
 module.exports = {
-    user_exist
+    user_exist,
+    Get_Hash_Password,
+    add_user,
+    delete_user
 }

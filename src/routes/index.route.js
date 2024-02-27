@@ -5,7 +5,6 @@ const { get } = require("../controllers/index.controllers");
 
 const authMiddleware = require("../middlewares/auth.middleware");
 
-
 router.get('/', authMiddleware, get);
 
 

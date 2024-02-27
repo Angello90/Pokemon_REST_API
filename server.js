@@ -7,6 +7,7 @@ const index_router = require("./src/routes/index.route");
 const pokemon_router = require('./src/routes/pokemon.route');
 const bcrypt = require("bcrypt");
 
+
 app.use(express.json());
 app.use(cors());
 app.set('view engine', 'ejs');

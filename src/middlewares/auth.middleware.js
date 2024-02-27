@@ -11,20 +11,20 @@ module.exports = async(req, res, next) =>{
             if(err){
                 return res.status(404).json({
                     status : 404,
-                    message : "No Authenticated !"
+                    message : `Error : ${err.message}`
                 })
             }
             else
             {
-                console.log(decode.password);
+                console.log(decode)
                 return next();
             }
         })
         return next();
     }else{
-        res.status(404).json({
-            status : 404,
-            message : "No Authenticated !"
+        res.status(400).json({
+            status : 400,
+            message : "Error : token not specified"
         })
     }
 }
