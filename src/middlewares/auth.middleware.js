@@ -9,9 +9,9 @@ module.exports = async(req, res, next) =>{
     {
         await jwt.verify(token, process.env.KEY_TOKEN, (err, decode) =>{
             if(err){
-                return res.status(404).json({
-                    status : 404,
-                    message : `Error : ${err.message}`
+                return res.status(401).json({
+                    status : 401,
+                    message : `Error : invalid token`
                 })
             }
             else
@@ -22,8 +22,8 @@ module.exports = async(req, res, next) =>{
         })
         return next();
     }else{
-        res.status(400).json({
-            status : 400,
+        res.status(401).json({
+            status : 401,
             message : "Error : token not specified"
         })
     }
