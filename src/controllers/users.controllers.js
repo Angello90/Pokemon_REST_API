@@ -25,5 +25,10 @@ module.exports = {
             })
         }
        
+    },
+
+    get_Admin_Kick : async(req, res, next) =>{
+        const uid = req.params.uid;
+        console.log(uid);
     }
 }

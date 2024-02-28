@@ -16,7 +16,7 @@ app.use('/', index_router);
 
 app.use('/pokemon', pokemon_router);
 
-app.use('/users/registr', users_router);
+app.use('/users', users_router);
 
 
 app.use((req, res, next) =>{
@@ -30,4 +30,4 @@ app.listen(process.env.PORT || 3000, () =>{
     console.log(`Server is running : http://localhost:${process.env.PORT || 3000}`);
 })
 
-module.export = app;
+module.exports = app;
