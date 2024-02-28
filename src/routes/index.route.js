@@ -3,9 +3,7 @@ const router = Router();
 
 const { get } = require("../controllers/index.controllers");
 
-const authMiddleware = require("../middlewares/auth.middleware");
-
-router.get('/', authMiddleware, get);
+router.get('/', get);
 
 
 module.exports = router;
