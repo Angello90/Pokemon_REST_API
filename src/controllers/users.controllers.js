@@ -10,7 +10,10 @@ module.exports = {
             } 
             console.log(data_user);
             await add_user(data_user);
-            const token_user = await get_token(data_user);
+            const token_user = await get_token({
+                pseudo : req.body.pseudo,
+                password : req.body.password
+            });
             return res.status(200).json({
                 token : token_user
             });

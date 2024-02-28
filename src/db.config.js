@@ -11,12 +11,12 @@ const Get_Hash_Password = async(password) =>{
 
 // admin function
 
-const user_exist = async(pseudo, password) =>{
+const user_exist = async(pseudo) =>{
     return prisma.user.findFirst({
         where : {
             pseudo : pseudo
         }
-    })
+    });
 }
 
 const add_user = async(data) =>{

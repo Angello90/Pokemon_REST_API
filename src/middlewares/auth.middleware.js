@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
-
 const { user_exist }  = require('../db.config');
-
+const bcrypt = require("bcrypt");
 
 module.exports = async(req, res, next) =>{
     const token = req.headers['token']
@@ -16,13 +15,36 @@ module.exports = async(req, res, next) =>{
             }
             else
             {
-                console.log(decode)
-                return next();
+                user_exist(decode.pseudo).then(d =>{
+                    if(d != null)
+                    {
+                        bcrypt.compare(decode.password, d.password, (err, result) =>{
+                            if(err)
+                            {
+                                return res.status(401).json({
+                                    status : 401,
+                                    message : `Error : invalid token`
+                                })
+                            }
+                            else
+                            {
+                                return next();
+                            }
+                        })
+                    }
+                    else{
+                        return res.status(401).json({
+                            status : 401,
+                            message : `Error : invalid token`
+                        })
+                    }
+                    
+                });
+                
             }
         })
-        return next();
     }else{
-        res.status(401).json({
+        return res.status(401).json({
             status : 401,
             message : "Error : token not specified"
         })
