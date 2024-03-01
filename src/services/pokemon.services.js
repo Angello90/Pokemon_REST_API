@@ -11,7 +11,6 @@ const getByName = (name) =>{
     }
 }
 
-
 module.exports = {
     getById,
     getByName

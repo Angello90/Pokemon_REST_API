@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const path = require("path");
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const index_router = require("./src/routes/index.route");
@@ -28,6 +29,9 @@ const specs = swaggerJsDoc(options)
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, '/src/public')));
+app.set("views", path.join(__dirname, "/src/views"));
+
 app.set('view engine', 'ejs');
 
 app.use("/swagger", swaggerUI.serve, swaggerUI.setup(specs));
