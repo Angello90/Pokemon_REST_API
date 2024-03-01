@@ -7,7 +7,8 @@ module.exports = {
         res.render('index', {
             urlImage    : pokemonOfTheDay.image.hires,
             name        : pokemonOfTheDay.name.french,
-            description : pokemonOfTheDay.description
+            description : pokemonOfTheDay.description,
+            Jname       : pokemonOfTheDay.name.japanese
         });
     },
     post : async(req, res, next) =>{
