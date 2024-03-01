@@ -28,16 +28,25 @@ const add_user = async(data) =>{
     });
 }
 
-const delete_user = async(id) =>{
+const kick_user = async(id) =>{
     try{
-        prisma.user.delete({
-            where : {
+        return prisma.user.update({
+            where: {
                 id : id
+            },
+            data : {
+                active : false
             }
         })
     }
     catch(e){
-        console.error(`Error : ${e.message}`);
+        if (e instanceof Prisma.PrismaClientKnownRequestError) {
+            if (e.code === 'P2025') {
+              console.log(
+                'There is a unique constraint violation, a new user cannot be created with this email'
+              )
+            }
+          }
     }
 }
 
@@ -50,6 +59,6 @@ module.exports = {
     user_exist,
     Get_Hash_Password,
     add_user,
-    delete_user,
+    kick_user,
     get_token
 }

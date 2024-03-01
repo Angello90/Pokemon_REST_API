@@ -1,4 +1,4 @@
-const { add_user, Get_Hash_Password, get_token } = require("../db.config");
+const { add_user, Get_Hash_Password, get_token, kick_user } = require("../db.config");
 
 module.exports = {
     post : async(req, res, next) =>{
@@ -24,11 +24,11 @@ module.exports = {
                 message : `Error : ${e.message}`
             })
         }
-       
     },
 
     get_Admin_Kick : async(req, res, next) =>{
-        const uid = req.params.uid;
-        console.log(uid);
+        const uid = parseInt(req.params.uid);
+        const respo = await kick_user(uid);
+        res.send("ok");
     }
 }

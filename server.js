@@ -2,15 +2,35 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const path = require("path");
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
 const index_router = require("./src/routes/index.route");
 const pokemon_router = require('./src/routes/pokemon.route');
-const bcrypt = require("bcrypt");
-const users_router = require("./src/routes/users.route")
+const users_router = require("./src/routes/users.route");
+
+
+const options = {
+    definition : {
+        openapi : "3.0.0",
+        info : {
+            title : "Pokemon API",
+            version : "beta 0.0.1",
+            description : "APi for pokemon"
+        },
+        servers : [
+            {url : `http://localhost:${process.env.PORT || 3000}`}
+        ]
+    },
+    apis : ["./src/routes/*js"]
+}
+
+const specs = swaggerJsDoc(options)
 
 app.use(express.json());
 app.use(cors());
 app.set('view engine', 'ejs');
+
+app.use("/swagger", swaggerUI.serve, swaggerUI.setup(specs));
 
 app.use('/', index_router);
 
