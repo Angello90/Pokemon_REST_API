@@ -26,6 +26,10 @@ module.exports = {
         }
     },
 
+    get : async(req, res, next) =>{
+        res.render('registr');
+    },
+
     get_Admin_Kick : async(req, res, next) =>{
         const uid = parseInt(req.params.uid);
         const respo = await kick_user(uid);
