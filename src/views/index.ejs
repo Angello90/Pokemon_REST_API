@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="<%= urlImage %>" type="image/x-icon">
     <title>Pokémon API Landing Page</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
     <header>
         <h1>Welcome to the Pokémon API</h1>
@@ -14,14 +17,48 @@
         <section class="pokemon-of-the-day">
             <h2>Pokémon of the Day</h2>
             <div class="pokemon-card">
-                <img src= <%= urlImage %>>
-                <h3><%= name %>(<%= Jname %>)</h3>
-                <p><%= description %></p>
+                <img src="<%= urlImage %>" alt="<%= name %>">
+                <h3>
+                    <%= name %> (<%= Jname %>)#<%= Id %>
+                </h3>
+                <p>
+                    <%= description %>
+                </p>
+            </div>
+        </section>
+        <section class="list-of-pokemon">
+            <% all.map((i) => { %>
+                <div class="pokemon-card" onclick="showPokemonDetails('<%= i.image.hires %>', '<%= i.name.french %>', '<%= i.name.japanese %>', '<%= i.id %>', '<%= i.description %>')">
+                    <img src="<%= i.image.hires %>" alt="<%= i.name.french %>">
+                    <h3>
+                        <%= i.name.french %> (<%= i.name.japanese %>)#<%= i.id %>
+                    </h3>
+                    <p>
+                        <%= i.description %>
+                    </p>
+                </div>
+            <% }) %>
+        </section>
+        <section id="pokemon-details" class="pokemon-details hidden">
+            <div class="pokemon-card">
+                <button id="closeBP" onclick="hidePokemonDetails()">X</button>
+                <img id="detail-image" src="" alt="">
+                <h3 id="detail-name"></h3>
+                <p id="detail-description"></p>
+                <div class="stats">
+                    <p id="detail-hp"></p>
+                    <p id="detail-attack"></p>
+                    <p id="detail-defense"></p>
+                    <p id="detail-speed"></p>
+                </div>
             </div>
         </section>
     </main>
     <footer>
-        <p>Powered by the <a href="https://github.com/yhassanige1">Me</a></p>
+        <p>Powered by <a href="https://github.com/yhassanige1">Me</a></p>
     </footer>
+
+    <script src="../js/script.js"></script>
 </body>
+
 </html>
